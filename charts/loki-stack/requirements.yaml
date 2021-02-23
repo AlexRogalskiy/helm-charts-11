@@ -9,7 +9,7 @@ dependencies:
   version: "^2.2.0"
 - name: "fluent-bit"
   condition: fluent-bit.enabled
-  repository: "https://grafana.github.io/helm-charts"
+  repository: "file://../fluent-bit"
   version: "^2.2.0"
 - name: "grafana"
   condition: grafana.enabled
