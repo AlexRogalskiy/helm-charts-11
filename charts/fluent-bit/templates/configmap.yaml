@@ -19,12 +19,15 @@ data:
         Log_Level      {{ .Values.config.loglevel }}
         Parsers_File   parsers.conf
     [INPUT]
-        Name           tail
-        Tag            kube.*
-        Path           /var/log/containers/*.log
-        Parser         docker
-        DB             /run/fluent-bit/flb_kube.db
-        Mem_Buf_Limit  {{ .Values.config.memBufLimit }}
+        Name             tail
+        Tag              kube.*
+        Path             /var/log/containers/*.log
+        Parser           docker
+        DB               /run/fluent-bit/flb_kube.db
+        Mem_Buf_Limit    {{ .Values.config.memBufLimit }}
+        {{- range $key,$value := .Values.config.extraInputConfigs }}
+        {{ $key }} {{ $value }}
+        {{- end }}
     [FILTER]
         Name           kubernetes
         Match          kube.*
